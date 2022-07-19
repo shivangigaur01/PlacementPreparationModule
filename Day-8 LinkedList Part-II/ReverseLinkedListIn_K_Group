@@ -1,0 +1,28 @@
+class Solution {
+    private ListNode rev(ListNode head,int k){
+        ListNode temp=head;
+        int c=0;
+        while(temp!=null){
+            temp=temp.next;
+            c++;
+        }
+        if(c<k)return head;
+        ListNode prev=null;
+        ListNode next=null;
+        ListNode cur=head;
+        ListNode tail=head;
+        for(int i=0;i<k;i++){
+            next=cur.next;
+            cur.next=prev;
+            prev=cur;
+            cur=next;
+        }
+        tail.next=rev(cur,k);
+        return prev;
+    }
+    
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode temp=head;
+        return rev(temp,k);
+    }
+}
